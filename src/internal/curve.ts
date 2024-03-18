@@ -4,7 +4,7 @@ import {
     AsyncCurve25519Wrapper,
     AsyncCurve as AsyncCurveType,
     Curve as CurveType,
-} from '@privacyresearch/curve25519-typescript'
+} from 'curve25519-ts'
 import { uint8ArrayToArrayBuffer } from '../helpers'
 
 export class Curve {
