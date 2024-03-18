@@ -1,5 +1,14 @@
 # Signal Protocol Typescript Library (libsignal-protocol-typescript)
 
+修改自 https://github.com/privacyresearchgroup/libsignal-protocol-typescript
+
+修改记录：
+
+### 20240318
+
+- 修改依赖 @privacyresearch/curve25519-typescript 为 curve25519-ts
+- bugfix
+
 Signal Protocol Typescript implementation based on [libsignal-protocol-javscript](https://github.com/signalapp/libsignal-protocol-javascript).
 
 ## Code layout
@@ -154,21 +163,7 @@ Once this is implemented, building a session is fairly straightforward:
 
 ```ts
 const starterMessageBytes = Uint8Array.from([
-  0xce,
-  0x93,
-  0xce,
-  0xb5,
-  0xce,
-  0xb9,
-  0xce,
-  0xac,
-  0x20,
-  0xcf,
-  0x83,
-  0xce,
-  0xbf,
-  0xcf,
-  0x85,
+  0xce, 0x93, 0xce, 0xb5, 0xce, 0xb9, 0xce, 0xac, 0x20, 0xcf, 0x83, 0xce, 0xbf, 0xcf, 0x85,
 ])
 
 const startSessionWithBoris = async () => {

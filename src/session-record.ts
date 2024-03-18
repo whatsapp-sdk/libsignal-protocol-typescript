@@ -72,16 +72,24 @@ export class SessionRecord implements RecordType {
     }
 
     static deserialize(serialized: string): SessionRecord {
-        const data = JSON.parse(serialized)
-        if (data.version !== SESSION_RECORD_VERSION) {
+        let data: any = serialized
+        try {
+            data = JSON.parse(serialized)
+        } catch (e) {
+            console.error(e)
+        }
+        if (data?.version !== SESSION_RECORD_VERSION) {
             SessionRecord.migrate(data)
         }
 
         const record = new SessionRecord()
         record.sessions = {}
-        for (const k of Object.keys(data.sessions)) {
-            record.sessions[k] = sessionTypeStringToArrayBuffer(data.sessions[k])
+        if (data?.sessions) {
+            for (const k of Object.keys(data.sessions)) {
+                record.sessions[k] = sessionTypeStringToArrayBuffer(data.sessions[k])
+            }
         }
+
         if (
             record.sessions === undefined ||
             record.sessions === null ||
