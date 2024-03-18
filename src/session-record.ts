@@ -25,9 +25,9 @@ export class SessionRecord implements RecordType {
             version: 'v1',
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             migrate: function migrateV1(data: any) {
-                const sessions = data.sessions
+                const sessions = data?.sessions || {}
                 let key
-                if (data.registrationId) {
+                if (data?.registrationId) {
                     for (key in sessions) {
                         if (!sessions[key].registrationId) {
                             sessions[key].registrationId = data.registrationId
@@ -51,7 +51,7 @@ export class SessionRecord implements RecordType {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private static migrate(data: any): void {
-        let run = data.version === undefined
+        let run = data?.version === undefined
         for (let i = 0; i < SessionRecord.migrations.length; ++i) {
             if (run) {
                 SessionRecord.migrations[i].migrate(data)
